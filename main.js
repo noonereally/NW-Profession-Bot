@@ -681,7 +681,7 @@ function _select_Gateway() { // Check for Gateway used to
                 18 : ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
                 19 : ["Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier3_17_Deliver", "Leadership_Tier2_12_Taxes", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
                 // 20
-                20 : ["Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
+                20 : ["Leadership_Tier3_20r_Master2", "Leadership_Tier3_20r_Master1", "Leadership_Tier3_20r_Master3", "Leadership_Tier3_20_Destroy", "Leadership_Tier3_13r_Protectdiamonds", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_12_Taxes", "Leadership_Tier3_16_Fight", "Leadership_Tier2_10_Battle", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
             },
         }, {
             profileName : "XP",
@@ -1634,7 +1634,7 @@ function _select_Gateway() { // Check for Gateway used to
         {name: 'optionals', title: 'Fill Optional Assets', def: true, type: 'checkbox', pane:'prof', tooltip: 'Enable to include selecting the optional assets of tasks'},
         {name: 'autopurchase', title: 'Auto Purchase Resources', def: true, type: 'checkbox', pane:'prof', tooltip: 'Automatically purchase required resources from gateway shop (100 at a time)'},
         {name: 'trainassets', title: 'Train Assets', def: true, type: 'checkbox', pane:'prof', tooltip: 'Enable training/upgrading of asset worker resources'},
-        {name: 'skippatrol', title: 'Skip Patrol task if > 10 calims', def: false, type: 'checkbox', pane:'prof', tooltip: 'Skip "Patrol the Mines" leadership task if there are more than 10 mining claims in the inventory'},
+        {name: 'skippatrol', title: 'Skip Patrol task if > 10 calims', def: true, type: 'checkbox', pane:'prof', tooltip: 'Skip "Patrol the Mines" leadership task if there are more than 10 mining claims in the inventory'},
         {name: 'refinead', title: 'Refine AD', def: true, type: 'checkbox', pane:'main', tooltip: 'Enable refining of AD on character switch'},
         {name: 'openrewards', title: 'Open Reward Chests', def: false, type: 'checkbox', pane:'main', tooltip: 'Enable opeing of leadership chests on character switch'}, //MAC-NW
         {name: 'autoreload', title: 'Auto Reload', def: false, type: 'checkbox', pane:'main', tooltip: 'Enabling this will reload the gateway periodically. (Ensure Auto Login is enabled)'},
@@ -2042,7 +2042,6 @@ function _select_Gateway() { // Check for Gateway used to
     function countResource(name) {
         var count = 0;
         var _bags = unsafeWindow.client.dataModel.model.ent.main.inventory.bags;
-        console.log("Checking bags for " + name);
         $.each(_bags, function (bi, bag) {
             bag.slots.forEach(function (slot) {
                 if (slot && slot.name === name) {
@@ -2051,6 +2050,21 @@ function _select_Gateway() { // Check for Gateway used to
             });
         });
         return count;
+    }
+
+    function countUnusedResource(name) {
+        var count = 0;
+        var bag = unsafeWindow.client.dataModel.model.ent.main.inventory.tradebag; 
+        bag.forEach(function (slot) {
+            if (slot && slot.name === name) {
+                 count = count + slot.count;
+            }
+        });
+        return count;
+    }
+
+    function countUsedResource(name) {
+        return countResource(name) - countUnusedResource(name);
     }
 
     /**
@@ -2063,7 +2077,7 @@ function _select_Gateway() { // Check for Gateway used to
     function searchForTask(taskname, profname) {
         // Return first object that matches exact craft name
         // edited by WloBeb - start Patrol the Mines task only if char has less than 10 Mining Claims
-        if (settings["skippatrol"] && taskname == "Leadership_Tier3_13_Patrol" && countResource("Crafting_Resource_Mining_Claim") >= 10) {
+        if (settings["skippatrol"] && taskname == "Leadership_Tier3_13_Patrol" && settings["Leadership" + charcurrent + "_profile"] == "AD" && countResource("Crafting_Resource_Mining_Claim") >= 10) {
             console.log("Too many Mining Claims: skiping");
             return false;
         }
@@ -2292,16 +2306,25 @@ function _select_Gateway() { // Check for Gateway used to
                 var mercenarys = $('div.modal-item-list a.Bronze img[src*="Crafting_Follower_Leader_Generic_T1_01"]').parent().parent();
                 var guards = $('div.modal-item-list a.Bronze img[src*="Crafting_Follower_Leader_Guard_T2_01"]').parent().parent();
                 var footmen = $('div.modal-item-list a.Bronze img[src*="Crafting_Follower_Leader_Private_T2_01"]').parent().parent();
-
-                if (mercenarys.length) {
-                    clicked = true;
-                    mercenarys[0].click();
-                } else if (guards.length) {
-                    clicked = true;
-                    guards[0].click();
-                } else if (footmen.length) {
-                    clicked = true;
-                    footmen[0].click();
+                
+                var T3_Epic = countResource("Crafting_Asset_Craftsman_Leadership_T3_Epic"); // number of heroes in inventory
+                var T3_Rare = countResource("Crafting_Asset_Craftsman_Leadership_T3_Rare"); // number of adventurers in inventory
+                var T3_Uncommon = countResource("Crafting_Asset_Craftsman_Leadership_T3_Uncommon"); // number of man-at-arms in inventory
+                var usedCommon = countUsedResource("Crafting_Asset_Craftsman_Leadership_T3_Common") 
+                               + countUsedResource("Crafting_Asset_Craftsman_Leadership_T2_Common") 
+                               + countUsedResource("Crafting_Asset_Craftsman_Leadership_T1_Common_1"); //number of used mercenarys, guards and footmans
+               
+                if (T3_Epic+T3_Rare+T3_Uncommon+usedCommon < settings["Leadership"+charcurrent] *2) {
+                    if (mercenarys.length) {
+                        clicked = true;
+                        mercenarys[0].click();
+                    } else if (guards.length) {
+                        clicked = true;
+                        guards[0].click();
+                    } else if (footmen.length) {
+                        clicked = true;
+                        footmen[0].click();
+                    }
                 }
             }
 
