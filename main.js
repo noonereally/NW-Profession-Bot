@@ -11,7 +11,7 @@
 // @originalAuthor Mustex/Bunta
 // @modifiedBy NW gateway Professions Bot Developers & Contributors
 
-// @version 4.7.13
+// @version 4.8
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -45,7 +45,7 @@ http://rawgit.com/Phr33d0m/NW-Profession-Bot/master/CHANGELOG.md
 // Make sure it's running on the main page, no frames
 
 
-var scriptVersion = 4.7;
+var scriptVersion = 4.8;
 var forceResetOnVerBelow = 4.7;
 var forceSettingsResetOnUpgrade = true;
 var microVersion = GM_info.script.version;
@@ -221,7 +221,7 @@ function _select_Gateway() { // Check for Gateway used to
                 else {
                 state_idle++;
                 // comment out to avoid console spam
-                //console.log("Page Idle ...", state_idle + "s");
+                // console.log("Page Idle ...", state_idle + "s");
                 }
                 }
                  */
@@ -317,7 +317,7 @@ function _select_Gateway() { // Check for Gateway used to
 function addProfile(profession, profile, base){
     maxLevel = maxLevel || 25;
     definedTask = definedTask || {};
-    //general prototype for profession
+    // general prototype for profession
     var professionBase = {
         taskListName:  typeof(profession) ==='string' ? profession : profession.taskListName, // Friendly name used at the UI
         taskName: typeof(profession) ==='string' ? profession : profession.taskName, // String used at the gateway
@@ -329,8 +329,7 @@ function addProfile(profession, profile, base){
     };
 
     
-
-    //creating new profession or using existing one 
+    // creating new profession or using existing one 
     var professionSet = (typeof profession === 'object')
         ? jQuery.extend(true, professionBase, profession)
         : definedTask[profession] || professionBase;
@@ -339,41 +338,40 @@ function addProfile(profession, profile, base){
     if(!definedTask[profession]) {definedTask[profession] = professionSet;}
     if(!profile) {return;}
 
-    //profile prototype
+    // profile prototype
     var profileBase = {
         profileName: 'Add profile name',
         isProfileActive: true,
         level: {}
     };
     
-    //getting new profile formated
+    // getting new profile formated
     var newProfile = jQuery.extend(true, profileBase, profile),
         baseProfile;
-    //getting base to extend
+    // getting base to extend
       base = base ||  (professionSet.taskListName === 'Leadership' ? 'RP' : 'default');
       if(base && typeof base === 'string') {
         var existing = professionSet.profiles.filter(function(e) {return e.profileName === base;});
         if(existing && existing.length) {baseProfile = existing[0];}
       }
     
-
-    //setting levels
+    // setting levels
     var baseLevels = baseProfile ? baseProfile.level : [],
         rec = 0;
     for(var i = 0; i <= maxLevel; i++) {
-      //recur has priority
+      // recur has priority
       if (rec > 0 ){ 
         rec -=1;
-        //setting empty array to handle later by fallback
+        // setting empty array to handle later by fallback
         newProfile.level[i] = newProfile.level[i] || [];
       }
       
       if(newProfile.level && newProfile.level[i]){
-            //override for arrays
+            // override for arrays
             if (Array.isArray(newProfile.level[i]) && newProfile.level[i].length){
-              //cancel rec since new array is defined
+              // cancel rec since new array is defined
                rec  = 0;
-              //process array
+              // process array
               var ind = newProfile.level[i].indexOf('+');
               if (ind>-1){
                 var def = newProfile.level[i].splice(0, ind);
@@ -382,23 +380,23 @@ function addProfile(profession, profile, base){
                 newProfile.level[i] = def;
               }
               
-            }//process '+N'
+            } // process '+N'
             else if (typeof newProfile.level[i] == 'string'
                   && newProfile.level[i][0] === '+'){
                   rec = parseInt(newProfile.level[i].replace(/\D/g,''));  
                   rec = rec > 0 ? rec : 0;
-                  //setting empty array to handle later by fallback
+                  // setting empty array to handle later by fallback
                   newProfile.level[i] = [];
                   rec -=1;
             }
       }
-      //falback to base if not defined
+      // falback to base if not defined
       else{
          var baseLevel = baseLevels[i] || [];
          newProfile.level[i] = baseLevel;
       }
         
-      //fallback from empty array to copy one before
+      // fallback from empty array to copy one before
       if (Array.isArray(newProfile.level[i]) && !newProfile.level[i].length && i> 0){
         newProfile.level[i] = newProfile.level[i-1];
       }
@@ -454,8 +452,8 @@ function addProfile(profession, profile, base){
                 21: ["Leadership_Tier4_21_Training", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier3_13_Training", "Leadership_Tier1_5_Explore", "Leadership_Tier1_4_Protect", "Leadership_Tier2_7_Training"],
                 22: ["Leadership_Tier4_21_Training", "Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_22_Guardclerics", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
                 23: ["Leadership_Tier4_23_Guardnoble", "Leadership_Tier4_21_Training", "Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_22_Guardclerics", "Leadership_Tier4_23r_Securepilgrimage", "Leadership_Tier3_13_Patrol", "Leadership_Tier2_9_Chart", "Leadership_Tier1_5_Explore"],
-                24: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_24r_Killdragon", "Leadership_Tier4_24_Wizardsseneschal", "Leadership_Tier4_21_Protectmagic", "Leadership_Tier4_21r_Killelemental", "Leadership_Tier4_22_Guardclerics", "Leadership_Tier4_23_Guardnoble", "Leadership_Tier4_23r_Securepilgrimage"],
-                25: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_24r_Killdragon", "Leadership_Tier4_24_Wizardsseneschal", "Leadership_Tier4_21_Protectmagic", "Leadership_Tier4_21r_Killelemental", "Leadership_Tier4_22_Guardclerics", "Leadership_Tier4_23_Guardnoble", "Leadership_Tier4_25_Battleelementalcultists", "Leadership_Tier4_23r_Securepilgrimage", "Leadership_Tier4_25r_Huntexperiment"],
+                24: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_24r_Killdragon", "Leadership_Tier4_24_Wizardsseneschal", "Leadership_Tier4_21_Protectmagic", "Leadership_Tier4_22_Guardclerics"],
+                25: ["Leadership_Tier4_22r_Capturebandithq", "Leadership_Tier4_24r_Killdragon", "Leadership_Tier4_24_Wizardsseneschal", "Leadership_Tier4_21_Protectmagic", "Leadership_Tier4_22_Guardclerics"],
             },
         }]
     };
@@ -464,26 +462,26 @@ function addProfile(profession, profile, base){
         "profileName": "RP Coffer",
             "level": {
                 "24": [
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics"
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                        "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ],
                 "25": [
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_25_Battleelementalcultists",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics",
-                    "Leadership_Tier4_25r_Huntexperiment"
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                        "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
+                        "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_25r_Huntexperiment", // Hunt down an escaped Experiment (Artifact Paraphenalia) 12h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ]
             }
         }, 'RP');
@@ -492,26 +490,26 @@ function addProfile(profession, profile, base){
         "profileName": "RP Double Coffer",
             "level": {
                 "24": [
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics"
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ],
                 "25": [
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_25_Battleelementalcultists",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics",
-                    "Leadership_Tier4_25r_Huntexperiment"
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
+                        "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                        "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_25r_Huntexperiment", // Hunt down an escaped Experiment (Artifact Paraphenalia) 12h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ]
             }
         }, 'RP');
@@ -520,26 +518,21 @@ function addProfile(profession, profile, base){
         "profileName": "RP (Stacked Assets)",
             "level": {
                 "24": [
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_23r_Securepilgrimage"
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ],
                 "25": [
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_25_Battleelementalcultists",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_25r_Huntexperiment"
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_25r_Huntexperiment", // Hunt down an escaped Experiment (Artifact Paraphenalia) 12h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ]
             }
         }, 'RP');
@@ -548,26 +541,26 @@ function addProfile(profession, profile, base){
         "profileName": "RP Coffer (Stacked Assets)",
             "level": {
                 "24": [
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics"
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                        "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ],
                 "25": [
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_25_Battleelementalcultists",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics",
-                    "Leadership_Tier4_25r_Huntexperiment"
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                        "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
+                        "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_25r_Huntexperiment", // Hunt down an escaped Experiment (Artifact Paraphenalia) 12h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ]
             }
         }, 'RP');
@@ -576,26 +569,26 @@ function addProfile(profession, profile, base){
         "profileName": "RP Double Coffer (Stacked Assets)",
             "level": {
                 "24": [
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics"
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ],
                 "25": [
-                    "Leadership_Tier4_24_Wizardsseneschal",
-                    "Leadership_Tier4_22r_Capturebandithq",
-                    "Leadership_Tier4_24r_Killdragon",
-                    "Leadership_Tier4_23_Guardnoble",
-                    "Leadership_Tier4_25_Battleelementalcultists",
-                    "Leadership_Tier4_23r_Securepilgrimage",
-                    "Leadership_Tier4_21_Protectmagic",
-                    "Leadership_Tier4_21r_Killelemental",
-                    "Leadership_Tier4_22_Guardclerics",
-                    "Leadership_Tier4_25r_Huntexperiment"
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
+                        "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                        "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                        "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
+                        "Leadership_Tier4_25r_Huntexperiment", // Hunt down an escaped Experiment (Artifact Paraphenalia) 12h
+                        "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
                 ]
             }
         }, 'RP');
@@ -714,13 +707,12 @@ function addProfile(profession, profile, base){
                 17: ["Jewelcrafting_Tier3_Neck_Offense_3", "Jewelcrafting_Tier3_Waist_Offense_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
                 18: ["Jewelcrafting_Tier3_Neck_Offense_3", "Jewelcrafting_Tier3_Waist_Misc_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
                 19: ["Jewelcrafting_Tier3_Neck_Offense_3", "Jewelcrafting_Tier3_Waist_Misc_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
-                
                 20: ["Jewelcrafting_Tier3_Neck_Misc_3", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
                 21: ["Jewelcrafting_Tier3_Neck_Misc_3", "Jewelcrafting_Tier4_Refine_Basic", "Jewelcrafting_Tier4_Gather_Basic", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
                 22: ["Jewelcrafting_Tier4_Neck_Base_3", "Jewelcrafting_Tier4_Refine_Basic", "Jewelcrafting_Tier4_Gather_Basic", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
                 23: ["Jewelcrafting_Tier4_Neck_Defense_3",  "Jewelcrafting_Tier4_Neck_Offense_3", "Jewelcrafting_Tier4_Gather_Basic", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
                 24: ["Jewelcrafting_Tier4_Neck_Misc_3", "Jewelcrafting_Tier3_Neck_Misc_3", "Jewelcrafting_Tier4_Gather_Basic", "Jewelcrafting_Tier3_Refine_Basic", "Jewelcrafting_Tier3_Gather_Basic", "Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
-                //basic resources  for lvl 16 and 15 items. 
+                // basic resources  for lvl 16 and 15 items. 
                 25: ["Jewelcrafting_Tier2_Gather_Basic", "Jewelcrafting_Tier1_Gather_Basic"],
             },
         }]
@@ -960,7 +952,6 @@ function addProfile(profession, profile, base){
             },
         });
     
-    
     addProfile("Mailsmithing", {
         profileName: "Zealot's Chainmail and rares",
         isProfileActive: true,
@@ -983,7 +974,6 @@ function addProfile(profession, profile, base){
             },
         });
     
-
     addProfile("Mailsmithing", {
         profileName: "Zealot's Chausses and rares",
         isProfileActive: true,
@@ -1006,8 +996,6 @@ function addProfile(profession, profile, base){
             },
         });
 
-    
-   
     addProfile("Mailsmithing", {
         profileName: "Prelate's Chainmail and rares",
         isProfileActive: true,
@@ -1647,6 +1635,22 @@ function addProfile(profession, profile, base){
     });
 
     addProfile("Alchemy", {
+        profileName: "Batch of Minor Potions (Rank 3 result)",
+        level: {
+            3: [
+            "Alchemy_Tier1_Accuracy_Potion_Minor_Mass", // Batch of Minor Elixir of Accuracy Rare
+            "Alchemy_Tier1_Reflexes_Potion_Minor_Mass", // Batch of Minor Elixirs of Reflexes Rare
+            "Alchemy_Tier1_Force_Potion_Minor_Mass", // Batch of Minor Force Potions
+            "Alchemy_Tier1_Fortification_Potion_Minor_Mass", // Batch of Minor Fortification Potions
+            // "Alchemy_Tier1_Healing_Potion_Minor_Mass", // Batch of Minor Healing Potions
+            "Alchemy_Tier1_Rejuvenation_Potion_Minor_Mass", // Batch of Minor Rejuvenation Potions
+            "Alchemy_Tier1_Tidespan_Potion_Minor_Mass" // Batch of Minor Tidespan Potions
+            ],
+            4: '+25',
+        }
+    });
+
+    addProfile("Alchemy", {
         profileName: "Elemental Aggregate",
         level: {
             24: ["Alchemy_Tier4_Create_Elemental_Aggregate", "Alchemy_Tier4_Experiment_Rank25", "Alchemy_Tier4_Experimentation_Rank24", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Basic"],
@@ -1839,7 +1843,11 @@ function addProfile(profession, profile, base){
             BI: 0,
             refined: [0, 0, 0, 0, 0, 0, 0, 0],
             refineLimitLeft: 0,
+            bagSlots: 0,
             emptyBagSlots: 0,
+            resourceSlots: 0,
+            emptyResourceSlots: 0,
+            overflow: 0,
             activeSlots: 0,
             celestial: 0,
             ardent: 0,
@@ -2205,7 +2213,7 @@ function addProfile(profession, profile, base){
             fillOptionals: true,
             autoPurchaseRes: true,
             trainAssets: true,
-            spreadLeadershipAssets: true,
+            //spreadLeadershipAssets: true,
             stopNotLeadership: 0,
             stopAlchemyAt3: false,
         },
@@ -2263,7 +2271,7 @@ function addProfile(profession, profile, base){
             fillOptionals: true,
             autoPurchaseRes: true,
             trainAssets: true,
-            spreadLeadershipAssets: true,
+            //spreadLeadershipAssets: true,
             stopNotLeadership: 0,
             stopAlchemyAt3: false,
         },
@@ -2306,12 +2314,12 @@ function addProfile(profession, profile, base){
         defaultCharSettings.taskListSettingsManual[i] = {};
         defaultCharSettings.taskListSettingsManual[i].Profession = tasklist[0].taskListName;
         defaultCharSettings.taskListSettingsManual[i].Profile = tasklist[0].profiles[0].profileName;
-        defaultCharSettings.taskListSettingsManual[i].fillAssets = 0;
+        //defaultCharSettings.taskListSettingsManual[i].fillAssets = 0;
         defaultCharSettings.taskListSettingsManual[i].useGond = false;
         defaultCharSettings.taskListSettingsManual[i].optPrio = 0;
     }
-    // 0 - default, 1 - do not fill, 2 - people (white to purple), 3 - people (purple to white), 4 - tools
-    var charSlotsFillAssetsOptions = ['default', 'Do not fill', 'people (white to purple)', 'people (purple to white)', 'tools'];
+    // Set in UI -> var _optPrioOptions = [{name:"Don\'t fill",value:-1}, {name:'Quality',value:0},{name:'Speed',value:1}, {name:'Auto Lead',value:2}, {name:'Only Workers H->L',value:3}, {name:'Only Workers L->H',value:4}, {name:'Tools Only',value:5}, {name:'Purple',value:6}, {name:'Blue',value:7}, {name:'Green',value:8}, {name:'White',value:9}];
+
 
     // Usable only after login (return account or char settings, depending on override and match)
     function getSetting(group, name) {
@@ -2400,7 +2408,7 @@ function addProfile(profession, profile, base){
         {scope: 'account', group: 'professionSettings', name: 'fillOptionals',         type: 'checkbox', pane: 'prof', title: tr('settings.profession.fillOptionals'),   tooltip: tr('settings.profession.fillOptionals.tooltip')},
         {scope: 'account', group: 'professionSettings', name: 'autoPurchaseRes',       type: 'checkbox', pane: 'prof', title: tr('settings.profession.autoPurchase'),    tooltip: tr('settings.profession.autoPurchase.tooltip')},
         {scope: 'account', group: 'professionSettings', name: 'trainAssets',           type:'checkbox',  pane: 'prof', title: tr('settings.profession.trainAssets'),     tooltip: tr('settings.profession.trainAssets.tooltip')},
-        {scope: 'account', group: 'professionSettings', name: 'spreadLeadershipAssets', type:'checkbox',  pane: 'prof', title: tr('settings.profession.spreadLeadership'), tooltip: tr('settings.profession.spreadLeadership.tooltip')},
+        //{scope: 'account', group: 'professionSettings', name: 'spreadLeadershipAssets', type:'checkbox',  pane: 'prof', title: tr('settings.profession.spreadLeadership'), tooltip: tr('settings.profession.spreadLeadership.tooltip')},
         {scope: 'account', group: 'professionSettings', name: 'stopNotLeadership',        type:'select',    pane: 'prof', title: tr('settings.profession.stopNotLeadership'),      tooltip: tr('settings.profession.stopNotLeadership.tooltip'),
             opts:[{name:'never',value:'0'},{name: '20' ,value: 20},{name: '25' ,value: 25}]},
         {scope: 'account', group: 'professionSettings', name: 'stopAlchemyAt3',        type:'checkbox',    pane: 'prof', title: tr('settings.profession.stopAlchemyAt3'),      tooltip: tr('settings.profession.stopAlchemyAt3.tooltip')},
@@ -2458,7 +2466,7 @@ function addProfile(profession, profile, base){
         {scope: 'char', group: 'professionSettings', name: 'fillOptionals',         type: 'checkbox', pane: 'prof', title: tr('settings.profession.fillOptionals'),   tooltip: tr('settings.profession.fillOptionals.tooltip')},
         {scope: 'char', group: 'professionSettings', name: 'autoPurchaseRes',       type: 'checkbox', pane: 'prof', title: tr('settings.profession.autoPurchase'),    tooltip: tr('settings.profession.autoPurchase.tooltip')},
         {scope: 'char', group: 'professionSettings', name: 'trainAssets',           type:'checkbox',  pane: 'prof', title: tr('settings.profession.trainAssets'),     tooltip: tr('settings.profession.trainAssets.tooltip')},
-        {scope: 'char', group: 'professionSettings', name: 'spreadLeadershipAssets', type:'checkbox',  pane: 'prof', title: tr('settings.profession.spreadLeadership'), tooltip: tr('settings.profession.spreadLeadership.tooltip')},
+        //{scope: 'char', group: 'professionSettings', name: 'spreadLeadershipAssets', type:'checkbox',  pane: 'prof', title: tr('settings.profession.spreadLeadership'), tooltip: tr('settings.profession.spreadLeadership.tooltip')},
         {scope: 'char', group: 'professionSettings', name: 'stopNotLeadership',        type:'select',    pane: 'prof', title: tr('settings.profession.stopNotLeadership'),      tooltip: tr('settings.profession.stopNotLeadership.tooltip'),
             opts:[{name:'never',value:0},{name: '20' ,value: 20},{name: '25' ,value: 25}]},
         {scope: 'char', group: 'professionSettings', name: 'stopAlchemyAt3',        type:'checkbox',    pane: 'prof', title: tr('settings.profession.stopAlchemyAt3'),      tooltip: tr('settings.profession.stopAlchemyAt3.tooltip')},
@@ -2467,7 +2475,7 @@ function addProfile(profession, profile, base){
         {scope: 'char', group: 'vendorSettings', name:'vendorGreenUnidAll',  type:'checkbox',     pane:'vend',   title:'Vendor All Green Unidentified Items',     tooltip:'Vendor all green unidentified items'},
         {scope: 'char', group: 'vendorSettings', name:'vendorBlueUnidAll',  type:'checkbox',     pane:'vend',   title:'Vendor All Blue Unidentified Items',     tooltip:'Vendor all blue unidentified items'},
         {scope: 'char', group: 'vendorSettings', name:'vendorInvocationBlessingsAll',  type:'checkbox',     pane:'vend',   title:'Vendor All Invocation Blessings',     tooltip:'Vendor All Invocation Blessings'},
-        {scope: 'char', group: 'vendorSettings', name:'vendorKitsLimit', type:'checkbox', pane:'vend',   title:'Vendor/Maintain Altar Node Kit Stacks',  tooltip:'Limit skill kits stacks to 50/Altars80, vendor kits unusable by class, remove all if player has one bag or full bags'},
+        {scope: 'char', group: 'vendorSettings', name:'vendorKitsLimit', type:'checkbox', pane:'vend',   title:'Vendor/Maintain Node Kit Stacks',  tooltip:'Limit skill kits stacks to 50, vendor kits unusable by class, remove all if player has one bag or full bags'},
         {scope: 'char', group: 'vendorSettings', name:'vendorAltarsLimit', type:'checkbox', pane:'vend', title:'Vendor/Maintain Altar Stacks',  tooltip:'Limit Altars to 80,remove all if player has one bag or full bags'},
         {scope: 'char', group: 'vendorSettings', name:'vendorKitsAll',   type:'checkbox', pane:'vend',   title:'Vendor All Node Kits',   tooltip:'Sell ALL skill kits.'},
         {scope: 'char', group: 'vendorSettings', name:'vendorAltarsAll', type:'checkbox', pane:'vend',   title:'Vendor All Altar',       tooltip:'Sell ALL Altars.'},
@@ -2488,9 +2496,6 @@ function addProfile(profession, profile, base){
         {scope: 'char', group: 'consolidationSettings', name:'consolidate',    type:'checkbox', pane:'bank', title: tr('settings.consolid.consolidate'),    tooltip: tr('settings.consolid.consolidate.tooltip'), border:true},
         {scope: 'char', group: 'consolidationSettings', name:'minToTransfer',  type:'text',     pane:'bank', title: tr('settings.consolid.minToTransfer'),  tooltip: tr('settings.consolid.minToTransfer.tooltip')},
         {scope: 'char', group: 'consolidationSettings', name:'minCharBalance', type:'text',     pane:'bank', title: tr('settings.consolid.minCharBalance'), tooltip: tr('settings.consolid.minCharBalance.tooltip')},
-        
-        
-        
     ];
 
 /*
@@ -2854,7 +2859,6 @@ function addProfile(profession, profile, base){
                 if (!next || tdate < next) {
                     next = tdate;
                 }
-                
             }
                 
         });
@@ -2912,7 +2916,7 @@ function addProfile(profession, profile, base){
             failedProfiles[prof.taskListName].push(profile.profileName);
             
             dfdNextRun.resolve(delay.SHORT);
-            //switchChar();
+            // switchChar();
             return false;
         }
         console.log(prof.taskName, "is level", level);
@@ -2940,7 +2944,7 @@ function addProfile(profession, profile, base){
                 // Click all buttons and select an item to use in the slot
                 var def = $.Deferred();
                 var buttonList = $('.taskdetails-assets:eq(1)').find("button");
-                if (buttonList.length && getSetting('professionSettings','fillOptionals')) {
+                if (buttonList.length && getSetting('professionSettings','fillOptionals') && (parseInt(addOptions["optPrio"]) != -1)) {
                     var _options = {
                         useGond: addOptions["useGond"],
                         optPrio: addOptions["optPrio"]
@@ -3257,7 +3261,8 @@ function addProfile(profession, profile, base){
     function SelectItemFor(buttonListIn, i, def, prof, taskname, profname, profile, professionLevel, options) {
         buttonListIn[i].click();
         WaitForState("").done(function() {
-
+            
+            console.log("fill optionals options: ", options);
             var $assets;
             if (options != null && options["useGond"]) {
                 $assets = $("div.modal-item-list a").has("img[src*='Hammer'],img[src*='_Resource_'],img[src*='_Assets_'],img[src*='_Tools_'],img[src*='_Tool_'],img[src*='_Jewelersloupe_'],img[src*='_Bezelpusher_']");
@@ -3271,70 +3276,116 @@ function addProfile(profession, profile, base){
                 $it;
 
             var clicked = false;
-
-            // Try to avoid using up higher rank assets needlessly
-            if (prof.taskName === "Leadership") {
-
-                var _enableSpreadLeadership = getSetting('professionSettings','spreadLeadershipAssets');
+            var $select1 = $assets;
+            var $select2 = $persons;
+            
+            // Set in UI -> var _optPrioOptions = [{name:"Don\'t fill",value:-1}, {name:'Quality',value:0},{name:'Speed',value:1}, {name:'Auto Lead',value:2}, {name:'Only Workers H->L',value:3}, {name:'Only Workers L->H',value:4}, {name:'Tools Only',value:5}, {name:'Purple',value:6}, {name:'Blue',value:7}, {name:'Green',value:8}, {name:'White',value:9}];
+            if (jQuery.isEmptyObject(options)) options["optPrio"] = 0;
+            switch(parseInt(options["optPrio"])) {
+                case 0:
+                    $select1 = $assets;
+                    $select2 = $persons;
+                    break;
+                case 1:
+                    $select1 = $persons;
+                    $select2 = $assets;
+                    break;
+                case 2:
+                    $select1 = $assets;
+                    $select2 = $persons;
+                    if (prof.taskName === "Leadership") {
+                        $select1 = $persons;
+                        $select2 = [];
+                        
+                    var T3_Epic = 0; var T3_Rare = 0; var T3_Uncommon = 0;    
+                    unsafeWindow.client.dataModel.model.ent.main.inventory.notassignedslots
+                         .forEach(function(item) {
+                                 if (item.name == "Crafting_Asset_Craftsman_Leadership_T3_Epic") T3_Epic = item.count;  // number of heroes not assigneds in inventory
+                                 if (item.name == "Crafting_Asset_Craftsman_Leadership_T3_Rare") T3_Rare = item.count;  // number of adventurers not assigneds in inventory
+                                 if (item.name == "Crafting_Asset_Craftsman_Leadership_T3_Uncommon") T3_Uncommon = item.count;  // number of man-at-arms not assigneds in inventory
+                         });
+                        
+                        //var usedCommon = countUsedResource("Crafting_Asset_Craftsman_Leadership_T3_Common") + countUsedResource("Crafting_Asset_Craftsman_Leadership_T2_Common") + countUsedResource("Crafting_Asset_Craftsman_Leadership_T1_Common_1"); //number of used mercenaries, guards and footmen
+                        var maxAssignedSlots = charSettingsList[curCharName].taskListSettings["Leadership"].taskSlots;
+                        var assignedSlots = unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.filter(function(entry) {
+                            return entry.category == "Leadership";
+                        }).length;
+                        var emptySlotsLeft = unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.filter(function(slot) {
+                            return (!slot.islockedslot && slot.category == "None")
+                        }).length;                        
+                        var leftToFill = Math.min((maxAssignedSlots - assignedSlots),emptySlotsLeft); 
+                        console.log("Epic", T3_Epic, "Rare", T3_Rare, "Uncommon", T3_Uncommon, "Slots to fill", leftToFill);
+                        if (T3_Epic + T3_Rare + T3_Uncommon > leftToFill) break;
+                        if (T3_Epic + T3_Rare + T3_Uncommon <= leftToFill) {
+                            quality = [".Bronze"];
+                        };
+                    }
+                    break;
+                case 3:
+                    $select1 = $persons;
+                    $select2 = $persons;
+                    break;
+                case 4:
+                    $select1 = $persons;
+                    $select2 = $persons;
+                    quality = quality.reverse();
+                    break;
+                case 5:
+                    $select1 = $assets;
+                    $select2 = $assets;
+                    break;
+                case 6:
+                    $select1 = $assets;
+                    $select2 = $persons;
+                    quality = [".Special"];
+                    break;
+                case 7:
+                    $select1 = $assets;
+                    $select2 = $persons;
+                    quality = [".Gold"];
+                    break;
+                case 8:
+                    $select1 = $assets;
+                    $select2 = $persons;
+                    quality = [".Silver"];                    
+                    break;
+                case 9:
+                    $select1 = $assets;
+                    $select2 = $persons;
+                    quality = [".Bronze"];
+                    break;
+            }
+               
+            function clickLeadershipBronze() {
                 var mercenarys = $('div.modal-item-list a.Bronze img[src*="Crafting_Follower_Leader_Generic_T1_01"]').parent().parent();
                 var guards = $('div.modal-item-list a.Bronze img[src*="Crafting_Follower_Leader_Guard_T2_01"]').parent().parent();
                 var footmen = $('div.modal-item-list a.Bronze img[src*="Crafting_Follower_Leader_Private_T2_01"]').parent().parent();
-                var T3_Epic = countResource("Crafting_Asset_Craftsman_Leadership_T3_Epic"); // number of heroes in inventory
-                var T3_Rare = countResource("Crafting_Asset_Craftsman_Leadership_T3_Rare"); // number of adventurers in inventory
-                var T3_Uncommon = countResource("Crafting_Asset_Craftsman_Leadership_T3_Uncommon"); // number of man-at-arms in inventory
-                var usedCommon = countUsedResource("Crafting_Asset_Craftsman_Leadership_T3_Common") + countUsedResource("Crafting_Asset_Craftsman_Leadership_T2_Common") + countUsedResource("Crafting_Asset_Craftsman_Leadership_T1_Common_1"); //number of used mercenaries, guards and footmen
-
-                // if spread leadership asset allocation is not selected, check for persons for best speed, in descending order
-                //if ((!_enableSpreadLeadership) && ((profile.profileName != "RP") || (professionLevel < 24) || (taskname == "Leadership_Tier4_22r_Capturebandithq") || (taskname == "Leadership_Tier4_24r_Killdragon") || (taskname == "Leadership_Tier4_24_Wizardsseneschal") || (T3_Epic + T3_Rare + T3_Uncommon > 6))) {
-                if (!_enableSpreadLeadership) {
-                    for (ic in quality) {
-                        if (quality[ic] == ".Bronze") {
-                            break;
-                        }
-                        $it = $persons.filter(quality[ic]);
-                        if ($it.length) {
-                            $it[0].click();
-                            clicked = true;
-                            break;
-                        }
-                    }
+                if (mercenarys.length) { 
+                    mercenarys[0].click();
+                    return true;
+                } 
+                if (guards.length) {
+                    guards[0].click();
+                    return true;
+                } 
+                if (footmen.length) {
+                    footmen[0].click();
+                    return true;
                 }
-
-                if (!clicked) {
-                    if ((!_enableSpreadLeadership) || (_enableSpreadLeadership && (T3_Epic + T3_Rare + T3_Uncommon + usedCommon < parseInt(charSettingsList[curCharName].taskListSettings["Leadership"].taskSlots) * 2))) {
-                        if (mercenarys.length) {
-                            clicked = true;
-                            mercenarys[0].click();
-                        } else if (guards.length) {
-                            clicked = true;
-                            guards[0].click();
-                        } else if (footmen.length) {
-                            clicked = true;
-                            footmen[0].click();
-                        }
-                    }
-                }
-
+                return false;
             }
 
-            var $select1;
-            var $select2;
-            if (jQuery.isEmptyObject(options) || options["optPrio"] == 0)  { // quality over speed 
-                $select1 = $assets;
-                $select2 = $persons;
-            }  
-            else {
-                $select1 = $persons;
-                $select2 = $assets;
-            }
-
-            // check resources & assets for best quality, in descending order
             if (!clicked) {
                 for (ic in quality) {
                     $it = $select1.filter(quality[ic]);
                     if ($it.length) {
-                        $it[0].click();
-                        clicked = true;
+                        if (prof.taskName === "Leadership" && $select1 == $persons && quality[ic] == ".Bronze") { 
+                            clicked = clickLeadershipBronze(); 
+                        }
+                        else {
+                            $it[0].click();
+                            clicked = true;
+                        }
                         break;
                     }
                 }
@@ -3345,8 +3396,13 @@ function addProfile(profession, profile, base){
                 for (ic in quality) {
                     $it = $select2.filter(quality[ic]);
                     if ($it.length) {
-                        $it[0].click();
-                        clicked = true;
+                        if (prof.taskName === "Leadership" && $select2 == $persons && quality[ic] == ".Bronze") { 
+                            clicked = clickLeadershipBronze(); 
+                        }
+                        else {
+                            $it[0].click();
+                            clicked = true;
+                        }
                         break;
                     }
                 }
@@ -3833,11 +3889,14 @@ function addProfile(profession, profile, base){
             charStatisticsList[curCharName].trackedResources[ri] = 0;
         });
 
+
         // Counting main inventory bags
         charStatisticsList[curCharName].general.emptyBagSlots = 0;
+        charStatisticsList[curCharName].general.bagSlots = 0;
         unsafeWindow.client.dataModel.model.ent.main.inventory.playerbags
         .forEach(function (bag) {
             bag.slots.forEach( function (slot, slotNum) {
+                charStatisticsList[curCharName].general.bagSlots += 1;
                 if (!slot) {
                     charStatisticsList[curCharName].general.emptyBagSlots += 1;
                     return;
@@ -3871,6 +3930,32 @@ function addProfile(profession, profile, base){
                         }
                     });                    
                 });
+        });
+        
+        // Counting Resource slots
+        charStatisticsList[curCharName].general.emptyResourceSlots = 0;
+        charStatisticsList[curCharName].general.resourceSlots = 0;
+        unsafeWindow.client.dataModel.model.ent.main.inventory.bags
+        .filter(function(bag) {
+                return (["CraftingResources"].indexOf(bag.bagid) > -1);
+            })
+        .forEach(function(bag) {
+            bag.slots.forEach( function (slot, slotNum) {
+                charStatisticsList[curCharName].general.resourceSlots += 1;
+                if (!slot) {
+                    charStatisticsList[curCharName].general.emptyResourceSlots += 1;
+                }
+            });                    
+        });
+
+        // Counting overflow
+        charStatisticsList[curCharName].general.overflow = 0;
+        unsafeWindow.client.dataModel.model.ent.main.inventory.bags
+        .filter(function(bag) {
+                return (["Overflow"].indexOf(bag.bagid) > -1);
+            })
+        .forEach(function(bag) {
+                charStatisticsList[curCharName].general.overflow += bag.slots.length;
         });
         
         // Slot assignment
@@ -4249,16 +4334,12 @@ function addProfile(profession, profile, base){
                     charStatisticsList[charName] = $.extend(true, {}, defaultCharStatistics, tempCharsStatistics);
                 })
                 
-                
                 if (scriptSettings.general.saveCharNextTime)
                     charNamesList.forEach( function(name, idx) {
                         chartimers[idx] = (new Date(charStatisticsList[name].general.nextTask));
                         chargold[idx]   = charStatisticsList[name].general.gold;
                         chardiamonds[idx] = charStatisticsList[name].general.diamonds;
                     });
-                
-                
-                
                 
                 // Adding the Account and character settings / info to the UI
                 addSettings();
@@ -4374,6 +4455,7 @@ function addProfile(profession, profile, base){
                 #settingsButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 0px; top: 0px; padding: 3px; z-index: 1000;}\
                 #pauseButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 23px; top: 0px; padding: 3px; z-index: 1000;}\
                 #manualButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 46px; top: 0px; padding: 3px; z-index: 1000;}\
+                #revisitButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 69px; top: 0px; padding: 3px; z-index: 1000;}\
                 #settingsPanel{position: fixed; overflow: auto; right: 0px; top: 0px; width: 700px;max-height:100%;font: 12px sans-serif; text-align: left; display: block; z-index: 1001;}\
                 #settings_title{font-weight: bolder; background: none repeat scroll 0% 0% rgb(204, 204, 204); border-bottom: 1px solid rgb(102, 102, 102); padding: 3px;}\
                 #settingsPanelButtonContainer {background: none repeat scroll 0% 0% rgb(204, 204, 204); border-top: 1px solid rgb(102, 102, 102);padding: 3px;text-align:center} \
@@ -4419,9 +4501,10 @@ function addProfile(profession, profile, base){
                 #dialog-inventory { overflow-y: scroll; font: 10px Arial; } #dialog-inventory table { width: 100% } #dialog-inventory table th { text-align: left; font-weight: bold; }\
                 .slt_None {color: red;} .slt_Lead {color: blue;} .slt_Alch {color: green;} .slt_Jewe {color: gold;} .slt_Leat {color: brown;}\
                 #copy_settings_to { width: 200px; height: 350px; margin: 5px 0;} #copy_settings_from { margin: 5px 0;}\
+                .warning1 { color: red; } .warning2 { color: orange; }\
+                .profileInput { width: 150px; } label.settingsTaskName { min-width: 100px; }\
                 ");
             
-
             // Add settings panel to page body
             $("body").append(
                 '<div id="settingsPanel" class="ui-widget-content">\
@@ -4463,6 +4546,23 @@ function addProfile(profession, profile, base){
             $("#manualButton").click( function () {
                 ManualSettings();
             });
+
+            // Add revisit all chars button to page
+            $("body").append('<div id="revisitButton"><span class="ui-icon ui-icon-arrowrefresh-1-e" title="Click to reprocess all chars" style="cursor: pointer; display: block;"></span></div>');
+            $("#revisitButton").click(function() {
+                charNamesList.forEach(function (charName, idx) { 
+                    chartimers[idx] = null;
+                    charStatisticsList[charName].general.nextTask = null;
+                    GM_setValue("statistics__char__" + charName + "@" + loggedAccount , JSON.stringify(charStatisticsList[charName]));
+                });
+                window.setTimeout(function() {
+                    unsafeWindow.location.href = current_Gateway;
+                }, 0);
+            });
+            
+            
+            
+            
             
             // Add info pane
             $("body").append("<div id='prinfopane' class='header-newrelease'>");
@@ -4482,7 +4582,6 @@ function addProfile(profession, profile, base){
                 $("#settingsPanel").hide();
             });
                 
-            
             //$('#script_settings').html('');
             var tab = addTab("#script_settings", tr('tab.scriptSettings'));
             addInputsUL(tab, 'script', 'main');
@@ -4500,7 +4599,6 @@ function addProfile(profession, profile, base){
                 window.setTimeout(function() {
                     GM_setValue("settings__char__" + c_name + "@" + loggedAccount, JSON.stringify(charSettingsList[c_name]));
                     console.log("Saved char_task setting: " + scope + "." + group + "." + name + "." + sub_name + " For: " + c_name);
-                    
                     
                     var keys = GM_listValues();
                     for (i = 0; i < keys.length; i++) {
@@ -4561,8 +4659,6 @@ function addProfile(profession, profile, base){
                     str += '</table><br />';
                 });
         
-                
-                
                 $('<div id="dialog-inventory" title="Inventory listing">' + str + '</div>').dialog({
                       resizable: true,
                       width: 550,
@@ -4715,7 +4811,6 @@ function addProfile(profession, profile, base){
                 });        
             });
 
-
             $('#custom__profiles__import_btn').button();
             $('#custom__profiles__import_btn').click(function() {
                 window.setTimeout(function() {
@@ -4737,7 +4832,7 @@ function addProfile(profession, profile, base){
                 }, 0);
             });
             
-            //Tracked resources tab
+            // Tracked resources tab
             tab = addTab("#script_settings", tr('tab.trackedResources'));
             var temp_html = 'Insert human readable resource name and NeverWinter gateway internal resource name (from Inventory Listing)';
             temp_html += '<div class="customResources"><label>Resource name: </label>';
@@ -4931,7 +5026,6 @@ function addProfile(profession, profile, base){
             temp_tab.append("<div id='slot_tracker'></div>");
             $("#info_tabs").tabs({ active: false, collapsible: true });                
 
-            
             // Adding per char settings UI
             var wrp = $('<div id="charSettingsAccordion">');
             $("#char_settings").append(wrp);
@@ -4964,7 +5058,7 @@ function addProfile(profession, profile, base){
                     _stopTaskAtLevelOptions.push({name: 'none', value: 0}); 
                     for (var i = 1; i < 26; i++) _stopTaskAtLevelOptions.push({name: i, value: i});
 
-                var _optPrioOptions = [{name:'Quality',value:0},{name:'Speed',value:1}];                    
+                var _optPrioOptions = [{name:"Don\'t fill",value:-1}, {name:'Quality',value:0},{name:'Speed',value:1}, {name:'Auto Lead',value:2}, {name:'Only Workers H->L',value:3}, {name:'Only Workers L->H',value:4}, {name:'Tools Only',value:5}, {name:'Purple',value:6}, {name:'Blue',value:7}, {name:'Green',value:8}, {name:'White',value:9}];
 
                 tasklist.forEach(function(task) {
                     if (!task.taskActive) return;
@@ -4982,8 +5076,8 @@ function addProfile(profession, profile, base){
                     var _useGond = {scope: 'char_task', group: 'taskListSettings', name: task.taskListName, sub_name: 'useGond', title: task.taskListName, type: 'checkbox', pane: 'tasks1', tooltip: ''};
                     var _stop = {scope: 'char_task', group: 'taskListSettings', name: task.taskListName, sub_name: 'stopTaskAtLevel', opts: _stopTaskAtLevelOptions ,title: task.taskListName, type: 'select', pane: 'tasks1', tooltip: ''};                    
 
-                    var _slt = createInput(_slots, charName, 'settingsInput', 'settingsLabel');
-                    var _prf = createInput(_profile, charName, 'settingsInput', 'settingsLabel');
+                    var _slt = createInput(_slots, charName, 'settingsInput', 'settingsLabel settingsTaskName');
+                    var _prf = createInput(_profile, charName, 'settingsInput profileInput', 'settingsLabel');
                     var _pr = createInput(_priority, charName, 'settingsInput', 'settingsLabel');
                     var _optp = createInput(_optPrio, charName, 'settingsInput', 'settingsLabel');
                     var _gnd = createInput(_useGond, charName, 'settingsInput', 'settingsLabel');
@@ -5001,7 +5095,6 @@ function addProfile(profession, profile, base){
                 });
                 task_tab.append(tableHTML);
 
-                
                 // Manual Slots allocation tab
                 var task2_tab = addTab(char_tabs[0], "Manual Tasks");
                 
@@ -5561,7 +5654,9 @@ function addProfile(profession, profile, base){
 
         // Resource tracker update.
         html = "<table class='withRotation'><tr><th class='rotate'><div><span>Character Name</div></span></th>";
-        html += "<th class='rotate'><div><span>Main bags empty slots</div></span></th>";
+        html += "<th class='rotate'><div><span>Overflow</div></span></th>";
+        html += "<th class='rotate'><div><span>Empty bag slots (total)</div></span></th>";
+        html += "<th class='rotate'><div><span>Empty resources slots</div></span></th>";
         html += "<th class='rotate'><div><span>Celestials</div></span></th>";
         html += "<th class='rotate'><div><span>Ardents</div></span></th>";
         trackResources.forEach(function(item) {
@@ -5572,10 +5667,21 @@ function addProfile(profession, profile, base){
 
         var endhtml = '';
         charNamesList.forEach(function(charName) {
+            var css_class = '';
             endhtml += '<tr><td>' + charName + '</td>';
-            endhtml += '<td>' + charStatisticsList[charName].general.emptyBagSlots + '</td>';
-            endhtml += '<td>' + charStatisticsList[charName].general.celestial + '</td>';
-            endhtml += '<td>' + charStatisticsList[charName].general.ardent + '</td>';
+            css_class = (charStatisticsList[charName].general.overflow > 0) ? " warning1 " : "";
+            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.overflow + '</td>';
+            css_class = ((charStatisticsList[charName].general.emptyBagSlots / charStatisticsList[charName].general.bagSlots *100) < 5) ? " warning2 " : "";
+            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.emptyBagSlots + ' (' + charStatisticsList[charName].general.bagSlots + ')' + '</td>';
+            css_class = ((charStatisticsList[charName].general.emptyResourceSlots / charStatisticsList[charName].general.resourceSlots *100) < 10) ? " warning2 " : "";
+            css_class = ((charStatisticsList[charName].general.emptyResourceSlots / charStatisticsList[charName].general.resourceSlots *100) < 5) ? " warning1 " : css_class;
+            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.emptyResourceSlots + '</td>';
+            css_class = (charStatisticsList[charName].general.celestial >= 11)  ? " warning2 " : "";
+            css_class = (charStatisticsList[charName].general.celestial == 14)  ? " warning1 " : css_class;
+            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.celestial + '</td>';
+            css_class = (charStatisticsList[charName].general.ardent >= 450)  ? " warning2 " : "";
+            css_class = (charStatisticsList[charName].general.ardent == 490)  ? " warning1 " : css_class;
+            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.ardent + '</td>';
             charStatisticsList[charName].trackedResources.forEach(function(count, idx) {
                 endhtml += '<td>' + count + '</td>';
                 total[idx] += count;
@@ -5584,7 +5690,7 @@ function addProfile(profession, profile, base){
         })
         endhtml += "</table>";
 
-        html += "<tr class=\"totals\"><td>Totals:</td><td>--</td><td>--</td><td>--</td>";
+        html += "<tr class=\"totals\"><td>Totals:</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td>";
         for (var i = 0; i < total.length; i++) html += "<td>" + total[i] + "</td>";
         html += "</tr>";
 
