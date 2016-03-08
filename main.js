@@ -11,7 +11,7 @@
 // @originalAuthor Mustex/Bunta
 // @modifiedBy NW gateway Professions Bot Developers & Contributors
 
-// @version 4.8
+// @version 4.8.6
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -465,8 +465,8 @@ function addProfile(profession, profile, base){
                     "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
                     "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
-                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                     "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                         "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
                         "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
                         "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
@@ -475,8 +475,8 @@ function addProfile(profession, profile, base){
                     "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
                     "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
-                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                     "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                         "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
                         "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
                         "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
@@ -544,8 +544,8 @@ function addProfile(profession, profile, base){
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
                     "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
                     "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
-                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                     "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                         "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
                         "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
                         "Leadership_Tier4_21r_Killelemental" // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
@@ -554,8 +554,8 @@ function addProfile(profession, profile, base){
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
                     "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
                     "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
-                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                     "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
                         "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
                         "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
                         "Leadership_Tier4_22_Guardclerics", // Guard Clerics of Ilmater (Artifact Paraphenalia) 8h
@@ -1300,13 +1300,12 @@ function addProfile(profession, profile, base){
         profileName: "craft  Elemental Shirts",
         level: {
             //purples  first. shirts > tunics > pants.
-            25: ['Leatherworking_Tier4_Leather_Shirt_Special_2', //Exquisite Elemental Shirt
-                'Leatherworking_Tier4_Leather_Shirt_Special_2_Set2', //Exquisite Elemental Tunic
-                'Leatherworking_Tier4_Leather_Pants_Special_2_Set2', //Exquisite Elemental Trousers
-                  'Leatherworking_Tier4_Leather_Pants_Special_2', //Exquisite Elemental Pants
-                'Leatherworking_Tier4_Leather_Shirt2', //Elemental Leather Shirt 
-                "Leatherworking_Tier3_Gather_Basic"
-                    ]
+            25: ["Leatherworking_Tier4_Leather_Shirt_Special_2", // Exquisite Elemental Shirt
+                "Leatherworking_Tier4_Leather_Shirt_Special_2_Set2", // Exquisite Elemental Tunic
+                "Leatherworking_Tier4_Leather_Pants_Special_2_Set2", // Exquisite Elemental Trousers
+                "Leatherworking_Tier4_Leather_Pants_Special_2", // Exquisite Elemental Pants
+                "Leatherworking_Tier4_Leather_Shirt2", // Elemental Leather Shirt 
+                "Leatherworking_Tier3_Gather_Basic"]
         }
     });
 
@@ -1314,13 +1313,12 @@ function addProfile(profession, profile, base){
         profileName: "craft  Elemental Tunic",
         level: {
             //purples  first. shirts > tunics > pants.
-            25: ['Leatherworking_Tier4_Leather_Shirt_Special_2_Set2', //Exquisite Elemental Tunic
-                'Leatherworking_Tier4_Leather_Shirt_Special_2', //Exquisite Elemental Shirt
-                'Leatherworking_Tier4_Leather_Pants_Special_2_Set2', //Exquisite Elemental Trousers
-                  'Leatherworking_Tier4_Leather_Pants_Special_2', //Exquisite Elemental Pants
-                'Leatherworking_Tier4_Leather_Shirt2_Set2', //Elemental Leather Tunic 
-                'Leatherworking_Tier3_Gather_Basic'
-                    ]
+            25: ["Leatherworking_Tier4_Leather_Shirt_Special_2_Set2", // Exquisite Elemental Tunic
+                "Leatherworking_Tier4_Leather_Shirt_Special_2", // Exquisite Elemental Shirt
+                "Leatherworking_Tier4_Leather_Pants_Special_2_Set2", // Exquisite Elemental Trousers
+                "Leatherworking_Tier4_Leather_Pants_Special_2", // Exquisite Elemental Pants
+                "Leatherworking_Tier4_Leather_Shirt2_Set2", // Elemental Leather Tunic 
+                "Leatherworking_Tier3_Gather_Basic"]
         }
     });
    
@@ -1328,13 +1326,12 @@ function addProfile(profession, profile, base){
         profileName: "craft  Elemental Trousers",
         level: {
             //purples  first. shirts > tunics > pants.
-            25: ['Leatherworking_Tier4_Leather_Pants_Special_2_Set2', //Exquisite Elemental Trousers
-                  'Leatherworking_Tier4_Leather_Pants_Special_2', //Exquisite Elemental Pants
-                'Leatherworking_Tier4_Leather_Shirt_Special_2_Set2', //Exquisite Elemental Tunic
-                'Leatherworking_Tier4_Leather_Shirt_Special_2', //Exquisite Elemental Shirt
-                'Leatherworking_Tier4_Leather_Pants2_Set2', //Elemental Leather Trousers 
-                'Leatherworking_Tier3_Gather_Basic'
-                    ]
+            25: ["Leatherworking_Tier4_Leather_Pants_Special_2_Set2", // Exquisite Elemental Trousers
+                "Leatherworking_Tier4_Leather_Pants_Special_2", // Exquisite Elemental Pants
+                "Leatherworking_Tier4_Leather_Shirt_Special_2_Set2", // Exquisite Elemental Tunic
+                "Leatherworking_Tier4_Leather_Shirt_Special_2", // Exquisite Elemental Shirt
+                "Leatherworking_Tier4_Leather_Pants2_Set2", // Elemental Leather Trousers 
+                "Leatherworking_Tier3_Gather_Basic"]
         }
     });
 
@@ -1342,13 +1339,12 @@ function addProfile(profession, profile, base){
         profileName: "craft  Elemental Pants",
         level: {
             //purples  first. shirts > tunics > pants.
-            25: ['Leatherworking_Tier4_Leather_Pants_Special_2', //Exquisite Elemental Pants
-                'Leatherworking_Tier4_Leather_Pants_Special_2_Set2', //Exquisite Elemental Trousers
-                'Leatherworking_Tier4_Leather_Shirt_Special_2_Set2', //Exquisite Elemental Tunic
-                'Leatherdeworking_Tier4_Leather_Shirt_Special_2', //Exquisite Elemental Shirt
-                'Leatherworking_Tier4_Leather_Pants2', //Elemental Leather Pants 
-                'Leatherworking_Tier3_Gather_Basic'
-                    ]
+            25: ["Leatherworking_Tier4_Leather_Pants_Special_2", // Exquisite Elemental Pants
+                "Leatherworking_Tier4_Leather_Pants_Special_2_Set2", // Exquisite Elemental Trousers
+                "Leatherworking_Tier4_Leather_Shirt_Special_2_Set2", // Exquisite Elemental Tunic
+                "Leatherdeworking_Tier4_Leather_Shirt_Special_2", // Exquisite Elemental Shirt
+                "Leatherworking_Tier4_Leather_Pants2", // Elemental Leather Pants 
+                "Leatherworking_Tier3_Gather_Basic"]
         }
     });
 
@@ -2207,6 +2203,7 @@ function addProfile(profession, profile, base){
             vendorEnchR2: false,
             vendorEnchR3: false,
             vendorEnchR4: false,
+            vendorEnchR5: false,
             vendorLesserMarks: false,
         },
         professionSettings: {
@@ -2265,6 +2262,7 @@ function addProfile(profession, profile, base){
             vendorEnchR2: false,
             vendorEnchR3: false,
             vendorEnchR4: false,
+            vendorEnchR5: false,
             vendorLesserMarks: false,
         },
         professionSettings: {
@@ -2433,6 +2431,7 @@ function addProfile(profession, profile, base){
         {scope: 'account', group: 'vendorSettings', name:'vendorEnchR2',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 2',    tooltip:'Vendor all Rank 2 enchantments & runestones found in player bags'},
         {scope: 'account', group: 'vendorSettings', name:'vendorEnchR3',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 3',    tooltip:'Vendor all Rank 3 enchantments & runestones found in player bags'},
         {scope: 'account', group: 'vendorSettings', name:'vendorEnchR4',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 4',    tooltip:'Vendor all Rank 4 enchantments & runestones found in player bags'},
+        {scope: 'account', group: 'vendorSettings', name:'vendorEnchR5',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 5',    tooltip:'Vendor all Rank 5 enchantments & runestones found in player bags'},
         {scope: 'account', group: 'vendorSettings', name:'vendorLesserMarks',    type:'checkbox', pane:'vend',   title:'Vendor Lesser Marks',    tooltip:'Vendor all Lesser Marks found in player bags'},
         {scope: 'account', group: 'consolidationSettings', name:'consolidate',    type:'checkbox', pane:'bank', title: tr('settings.consolid.consolidate'),    tooltip: tr('settings.consolid.consolidate.tooltip') ,border:true},
         {scope: 'account', group: 'consolidationSettings', name:'bankCharName',   type:'text',     pane:'bank', title: tr('settings.consolid.bankerName'),     tooltip: tr('settings.consolid.bankerName.tooltip')},
@@ -2450,7 +2449,7 @@ function addProfile(profession, profile, base){
             }
         },
         {scope: 'char', group: 'general', name:'overrideGlobalSettings',    type:'checkbox',    pane:'main_not_tab',    title:'Override account settings for this char',   tooltip:''},
-        {scope: 'char', group: 'general', name:'manualTaskSlots',    type:'checkbox',    pane:'main_not_tab',    title:'Use manual task allocation tab',   tooltip:'Per slot profile allocation'},
+        {scope: 'char', group: 'general', name:'manualTaskSlots',    type:'checkbox',    pane:'main_not_tab',    title:'Use per-slot task allocation tab',   tooltip:'Per slot profile allocation'},
         
         {scope: 'char', group: 'generalSettings', name: 'openRewards', title: tr('settings.general.openrewards'),  type: 'checkbox', pane: 'main', tooltip: tr('settings.general.openrewards.tooltip')},
         {scope: 'char', group: 'generalSettings', name: 'openCelestialBox', title: tr('settings.general.opencelestial'),  type: 'checkbox', pane: 'main', tooltip: tr('settings.general.opencelestial.tooltip')},
@@ -2492,6 +2491,7 @@ function addProfile(profession, profile, base){
         {scope: 'char', group: 'vendorSettings', name:'vendorEnchR2',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 2',    tooltip:'Vendor all Rank 2 enchantments & runestones found in player bags'},
         {scope: 'char', group: 'vendorSettings', name:'vendorEnchR3',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 3',    tooltip:'Vendor all Rank 3 enchantments & runestones found in player bags'},
         {scope: 'char', group: 'vendorSettings', name:'vendorEnchR4',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 4',    tooltip:'Vendor all Rank 4 enchantments & runestones found in player bags'},
+        {scope: 'char', group: 'vendorSettings', name:'vendorEnchR5',    type:'checkbox', pane:'vend',   title:'Vendor enchants & runes Rank 5',    tooltip:'Vendor all Rank 5 enchantments & runestones found in player bags'},
         {scope: 'char', group: 'vendorSettings', name:'vendorLesserMarks',    type:'checkbox', pane:'vend',   title:'Vendor Lesser Marks',    tooltip:'Vendor all Lesser Marks found in player bags'},
         {scope: 'char', group: 'consolidationSettings', name:'consolidate',    type:'checkbox', pane:'bank', title: tr('settings.consolid.consolidate'),    tooltip: tr('settings.consolid.consolidate.tooltip'), border:true},
         {scope: 'char', group: 'consolidationSettings', name:'minToTransfer',  type:'text',     pane:'bank', title: tr('settings.consolid.minToTransfer'),  tooltip: tr('settings.consolid.minToTransfer.tooltip')},
@@ -3295,7 +3295,7 @@ function addProfile(profession, profile, base){
                     $select2 = $persons;
                     if (prof.taskName === "Leadership") {
                         $select1 = $persons;
-                        $select2 = [];
+                        $select2 = $persons;
                         
                     var T3_Epic = 0; var T3_Rare = 0; var T3_Uncommon = 0;    
                     unsafeWindow.client.dataModel.model.ent.main.inventory.notassignedslots
@@ -3564,7 +3564,7 @@ function addProfile(profession, profile, base){
                 console.log("Canceling ZAX orders");
 
                 var charDiamonds = parseInt(unsafeWindow.client.dataModel.model.ent.main.currencies.diamonds);
-                var ZenRate = parseInt(getSetting('consolidationSettings','transferRate'));
+                var ZenRate = parseInt(accountSettings.consolidationSettings.transferRate);
 
                 // cycle through the zax listings
                 unsafeWindow.client.dataModel.model.exchangeaccountdata.openorders.forEach(function(item) {
@@ -3613,7 +3613,7 @@ function addProfile(profession, profile, base){
         var _tmpBag = [];
         var _profitems = [];
         // Pattern for items to leave out of auto vendoring (safeguard)
-        var _excludeItems = /(Gemfood|Gem_Upgrade_Resource_R[3-9]|Artifact(?!_Upgrade_Resource_R1_)|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[5-9]_Enchantment|T[5-9]_Runestones|T10_Enchantment|T10_Runestones|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 17.01.2015
+        var _excludeItems = /(Gemfood|Gem_Upgrade_Resource_R[3-9]|Artifact(?!_Upgrade_Resource_R1_)|Hoard|Coffer|Fuse|Ward|Preservation|Armor_Enhancement|Weapon_Enhancement|T[6-9]_Enchantment|T[1-9][0-9]_Enchantment|T[6-9]_Runestone|T[1-9][0-9]_Runestone|4c_Personal|Item_Potion_Companion_Xp|Gateway_Rewardpack|Consumable_Id_Scroll|Dungeon_Delve_Key)/; // edited by RottenMind 17.01.2015
 
             /** Profession leveling result item cleanup logic for T1-4 crafted results
              * Created by RM on 14.1.2015.
@@ -4501,7 +4501,7 @@ function addProfile(profession, profile, base){
                 #dialog-inventory { overflow-y: scroll; font: 10px Arial; } #dialog-inventory table { width: 100% } #dialog-inventory table th { text-align: left; font-weight: bold; }\
                 .slt_None {color: red;} .slt_Lead {color: blue;} .slt_Alch {color: green;} .slt_Jewe {color: gold;} .slt_Leat {color: brown;}\
                 #copy_settings_to { width: 200px; height: 350px; margin: 5px 0;} #copy_settings_from { margin: 5px 0;}\
-                .warning1 { color: red; } .warning2 { color: orange; }\
+                .warning1 { color: red; } .warning2 { color: orange; } .warning3 { color: green; }\
                 .profileInput { width: 150px; } label.settingsTaskName { min-width: 100px; }\
                 ");
             
@@ -5096,7 +5096,7 @@ function addProfile(profession, profile, base){
                 task_tab.append(tableHTML);
 
                 // Manual Slots allocation tab
-                var task2_tab = addTab(char_tabs[0], "Manual Tasks");
+                var task2_tab = addTab(char_tabs[0], "Per-slot Tasks");
                 
                 var tableHTML2 = $('<table><thead><tr><th>Slot #</th><th>Profession</th><th>Profile</th><th>Optionals</th><th>Gond</th></tr></thead><tbody>');
 
@@ -5655,7 +5655,8 @@ function addProfile(profession, profile, base){
         // Resource tracker update.
         html = "<table class='withRotation'><tr><th class='rotate'><div><span>Character Name</div></span></th>";
         html += "<th class='rotate'><div><span>Overflow</div></span></th>";
-        html += "<th class='rotate'><div><span>Empty bag slots (total)</div></span></th>";
+        html += "<th class='rotate'><div><span>Empty bag slots</div></span></th>";
+        html += "<th class='rotate'><div><span>Total bag slots</div></span></th>";
         html += "<th class='rotate'><div><span>Empty resources slots</div></span></th>";
         html += "<th class='rotate'><div><span>Celestials</div></span></th>";
         html += "<th class='rotate'><div><span>Ardents</div></span></th>";
@@ -5672,15 +5673,20 @@ function addProfile(profession, profile, base){
             css_class = (charStatisticsList[charName].general.overflow > 0) ? " warning1 " : "";
             endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.overflow + '</td>';
             css_class = ((charStatisticsList[charName].general.emptyBagSlots / charStatisticsList[charName].general.bagSlots *100) < 5) ? " warning2 " : "";
-            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.emptyBagSlots + ' (' + charStatisticsList[charName].general.bagSlots + ')' + '</td>';
+            endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.emptyBagSlots + '</td>';
+            
+            endhtml += '<td>' + charStatisticsList[charName].general.bagSlots + '</td>';
+            
             css_class = ((charStatisticsList[charName].general.emptyResourceSlots / charStatisticsList[charName].general.resourceSlots *100) < 10) ? " warning2 " : "";
             css_class = ((charStatisticsList[charName].general.emptyResourceSlots / charStatisticsList[charName].general.resourceSlots *100) < 5) ? " warning1 " : css_class;
             endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.emptyResourceSlots + '</td>';
             css_class = (charStatisticsList[charName].general.celestial >= 11)  ? " warning2 " : "";
             css_class = (charStatisticsList[charName].general.celestial == 14)  ? " warning1 " : css_class;
             endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.celestial + '</td>';
-            css_class = (charStatisticsList[charName].general.ardent >= 450)  ? " warning2 " : "";
-            css_class = (charStatisticsList[charName].general.ardent == 490)  ? " warning1 " : css_class;
+            
+            css_class = (charStatisticsList[charName].general.ardent >= 270)  ? " warning3 " : "";
+            css_class = (charStatisticsList[charName].general.ardent >= 360)  ? " warning2 " : css_class;
+            css_class = (charStatisticsList[charName].general.ardent >= 480)  ? " warning1 " : css_class;
             endhtml += '<td class=\"' + css_class + '\">' + charStatisticsList[charName].general.ardent + '</td>';
             charStatisticsList[charName].trackedResources.forEach(function(count, idx) {
                 endhtml += '<td>' + count + '</td>';
@@ -5690,7 +5696,7 @@ function addProfile(profession, profile, base){
         })
         endhtml += "</table>";
 
-        html += "<tr class=\"totals\"><td>Totals:</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td>";
+        html += "<tr class=\"totals\"><td>Totals:</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td>";
         for (var i = 0; i < total.length; i++) html += "<td>" + total[i] + "</td>";
         html += "</tr>";
 
@@ -5873,6 +5879,16 @@ function addProfile(profession, profile, base){
             };
             _vendorItems[_vendorItems.length] = {
                 pattern: /^T4_Runestone/,
+                limit: 0
+            };
+        }
+        if (getSetting('vendorSettings', 'vendorEnchR5')) {
+            _vendorItems[_vendorItems.length] = {
+                pattern: /^T5_Enchantment/,
+                limit: 0
+            };
+            _vendorItems[_vendorItems.length] = {
+                pattern: /^T5_Runestone/,
                 limit: 0
             };
         }
