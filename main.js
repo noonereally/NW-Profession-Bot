@@ -11,7 +11,7 @@
 // @originalAuthor Mustex/Bunta
 // @modifiedBy NW gateway Professions Bot Developers & Contributors
 
-// @version 4.8.12
+// @version 4.9.2
 // @license http://creativecommons.org/licenses/by-nc-sa/3.0/us/
 // @grant GM_getValue
 // @grant GM_setValue
@@ -38,14 +38,14 @@ Developers & Contributors
 - WloBeb
 
 RELEASE NOTES:
-http://rawgit.com/Phr33d0m/NW-Profession-Bot/master/CHANGELOG.md
+https://github.com/Phr33d0m/NW-Profession-Bot/blob/master/CHANGELOG.md
 
  */
 
 // Make sure it's running on the main page, no frames
 
 
-var scriptVersion = 4.8;
+var scriptVersion = 4.9;
 var forceResetOnVerBelow = 4.7;
 var forceSettingsResetOnUpgrade = true;
 var microVersion = GM_info.script.version;
@@ -426,6 +426,7 @@ function addProfile(profession, profile, base){
         taskDescription: "",
         profiles: [{
             profileName: "RP",
+            //profileDescription: "Does Resonance Stones, Thaumaturgic Stones and Artifact Stones.",
             isProfileActive: true,
             level: {
                 0: ["Leadership_Tier0_Intro_1"],
@@ -460,6 +461,7 @@ function addProfile(profession, profile, base){
 
     addProfile('Leadership',{
         "profileName": "RP Coffer",
+        //"profileDescription": "Does Resonance Stones, Enchanted Coffers and Thaumaturgic Stones.",
             "level": {
                 "24": [
                     "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
@@ -488,6 +490,7 @@ function addProfile(profession, profile, base){
 
     addProfile('Leadership',{
         "profileName": "RP Double Coffer",
+        //"profileDescription": "Does Resonance Stones and Enchanted Coffers.",
             "level": {
                 "24": [
                     "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
@@ -516,6 +519,7 @@ function addProfile(profession, profile, base){
 
     addProfile('Leadership',{
         "profileName": "RP (Stacked Assets)",
+        //"profileDescription": "Does Resonance Stones, Thaumaturgic Stones and Artifact Stones. Also places all of the rare tasks after the non-rare Resonance Stone task, so that high quality workers do not get misplaced over time.",
             "level": {
                 "24": [
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
@@ -539,6 +543,7 @@ function addProfile(profession, profile, base){
 
     addProfile('Leadership',{
         "profileName": "RP Coffer (Stacked Assets)",
+        //"profileDescription": "Does Resonance Stones, Enchanted Coffers and Thaumaturgic Stones. Also places all of the rare tasks after the non-rare Resonance Stone task, so that high quality workers do not get misplaced over time.",
             "level": {
                 "24": [
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
@@ -567,6 +572,7 @@ function addProfile(profession, profile, base){
 
     addProfile('Leadership',{
         "profileName": "RP Double Coffer (Stacked Assets)",
+        //"profileDescription": "Does Resonance Stones and Enchanted Coffers. Also places all of the rare tasks after the non-rare Resonance Stone task, so that high quality workers do not get misplaced over time.",
             "level": {
                 "24": [
                     "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
@@ -592,6 +598,57 @@ function addProfile(profession, profile, base){
                 ]
             }
         }, 'RP');
+        
+    addProfile('Leadership',{
+        "profileName": "RP RTC",
+        //"profileDescription": "Resonance, Thaumaturgic  Enchanted Coffers.",
+            "level": {
+                "24": [
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_21r_Killelemental", // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h
+                    "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                ],
+                "25": [
+                    "Leadership_Tier4_22r_Capturebandithq", // Capture Bandit Leader (Resonant Bag) Rare 8h
+                    "Leadership_Tier4_24_Wizardsseneschal", // Escort a Wizard's Seneschal (Resonant Bag) 16h
+                    "Leadership_Tier4_24r_Killdragon", // Kill a Young Dragon (Resonant Bag) Rare 12h
+                    "Leadership_Tier4_21_Protectmagic", // Protect Magical Goods Market (Bandit Camp Clue, Thaumaturgic Bag) 12h
+                    "Leadership_Tier4_21r_Killelemental", // Kill Rogue Elemental (Thaumaturgic Bag) Rare 16h
+                    "Leadership_Tier4_23_Guardnoble", // Guard Young Noble on Trip (Enchanted Coffer) 4h            
+                    "Leadership_Tier4_25_Battleelementalcultists", // Battle Elemental Cultists (2xEnchanted Coffer) 12h
+                    "Leadership_Tier4_23r_Securepilgrimage", // Provide Security For Pilgrims (Enchanted Coffer) Rare 8h
+                ]
+            }
+        }, 'RP');        
+        
+    addProfile('Leadership',{
+        "profileName": "RP RTC + Labor",
+            "level": {
+                "24": ["Leadership_Voucher_Labor_T3","+"],
+                "25": ["Leadership_Voucher_Labor_T3","+"],
+            }
+        }, 'RP RTC');        
+    
+    addProfile('Leadership',{
+        "profileName": "RP RTC + AD",
+            "level": {
+                "24": ["Leadership_Voucher_Ad_T4","+"],
+                "25": ["Leadership_Voucher_Ad_T4","+"],
+            }
+        }, 'RP RTC');        
+    
+    addProfile('Leadership',{
+        "profileName": "RP RTC + AD&Labor",
+            "level": {
+                "24": ["Leadership_Voucher_Ad_T4","Leadership_Voucher_Labor_T3","+"],
+                "25": ["Leadership_Voucher_Ad_T4","Leadership_Voucher_Labor_T3","+"],
+            }
+        }, 'RP RTC');        
+        
 
     addProfile("Leadership", {
         profileName: "Assets",
@@ -1595,12 +1652,12 @@ function addProfile(profession, profile, base){
             isProfileActive: true,
             level: {
                 0: ["Alchemy_Tier0_Intro_1"],
-                1: ["Alchemy_Tier1_Experiment_Rank2", "Alchemy_Tier1_Experimentation_Rank1", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
-                2: ["Alchemy_Tier1_Experiment_Rank3", "Alchemy_Tier1_Experimentation_Rank2", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
-                3: ["Alchemy_Tier1_Experiment_Rank4", "Alchemy_Tier1_Experimentation_Rank3", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
-                4: ["Alchemy_Tier1_Experiment_Rank5", "Alchemy_Tier1_Experimentation_Rank4", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
-                5: ["Alchemy_Tier1_Experiment_Rank6", "Alchemy_Tier1_Experimentation_Rank5", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
-                6: ["Alchemy_Tier1_Experiment_Rank7", "Alchemy_Tier1_Experimentation_Rank6", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
+                1: ["Alchemy_Tier1_Experiment_Rank2", "Alchemy_Tier1_Experimentation_Rank1", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
+                2: ["Alchemy_Tier1_Experiment_Rank3", "Alchemy_Tier1_Experimentation_Rank2", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
+                3: ["Alchemy_Tier1_Experiment_Rank4", "Alchemy_Tier1_Experimentation_Rank3", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
+                4: ["Alchemy_Tier1_Experiment_Rank5", "Alchemy_Tier1_Experimentation_Rank4", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
+                5: ["Alchemy_Tier1_Experiment_Rank6", "Alchemy_Tier1_Experimentation_Rank5", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
+                6: ["Alchemy_Tier1_Experiment_Rank7", "Alchemy_Tier1_Experimentation_Rank6", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
                 7: ["Alchemy_Tier2_Experiment_Rank08", "Alchemy_Tier2_Experimentation_Rank07", "Alchemy_Tier2_Refine_Basic", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier2_Gather_Basic"],
                 8: ["Alchemy_Tier2_Experiment_Rank09", "Alchemy_Tier2_Experimentation_Rank08", "Alchemy_Tier2_Refine_Basic", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier2_Gather_Basic"],
                 9: ["Alchemy_Tier2_Experiment_Rank10", "Alchemy_Tier2_Experimentation_Rank09", "Alchemy_Tier2_Refine_Basic", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier1_Refine_Basic", "Alchemy_Tier2_Gather_Basic"],
@@ -1616,10 +1673,10 @@ function addProfile(profession, profile, base){
                 19: ["Alchemy_Tier3_Experiment_Rank20", "Alchemy_Tier3_Experimentation_Rank19", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier2_Refine_Basic", "Alchemy_Tier1_Refine_Special", "Alchemy_Tier3_Refine_Basic", "Alchemy_Tier3_Gather_Basic"],
                 20: ["Alchemy_Tier3_Experiment_Rank21", "Alchemy_Tier3_Experimentation_Rank20", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier4_Gather_Basic"],
                 21: ["Alchemy_Tier4_Experiment_Rank22", "Alchemy_Tier4_Experimentation_Rank21", "Alchemy_Tier2_Aquaregia", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier4_Gather_Basic"],
-                22: ["Alchemy_Tier4_Experiment_Rank23", "Alchemy_Tier4_Experimentation_Rank22", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Basic"],
-                23: ["Alchemy_Tier4_Experiment_Rank24", "Alchemy_Tier4_Experimentation_Rank23", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Basic"],
-                24: ["Alchemy_Tier4_Experiment_Rank25", "Alchemy_Tier4_Experimentation_Rank24", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Basic"],
-                25: ["Alchemy_Tier4_Experimentation_Rank25", "Alchemy_Tier4_Create_Elemental_Unified", "Alchemy_Tier4_Create_Elemental_Aggregate", "Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier3_Potency_Potion_Major", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier1_Gather_Basic"],
+                22: ["Alchemy_Tier4_Experiment_Rank23", "Alchemy_Tier4_Experimentation_Rank22", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Components"],
+                23: ["Alchemy_Tier4_Experiment_Rank24", "Alchemy_Tier4_Experimentation_Rank23", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Components"],
+                24: ["Alchemy_Tier4_Experiment_Rank25", "Alchemy_Tier4_Experimentation_Rank24", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Components"],
+                25: ["Alchemy_Tier4_Experimentation_Rank25", "Alchemy_Tier4_Create_Elemental_Unified", "Alchemy_Tier4_Create_Elemental_Aggregate", "Alchemy_Tier3_Protection_Potion_Major", "Alchemy_Tier3_Potency_Potion_Major", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier1_Gather_Components"],
             },
         }]
     };
@@ -1659,7 +1716,7 @@ function addProfile(profession, profile, base){
     addProfile("Alchemy", {
         profileName: "Elemental Aggregate",
         level: {
-            24: ["Alchemy_Tier4_Create_Elemental_Aggregate", "Alchemy_Tier4_Experiment_Rank25", "Alchemy_Tier4_Experimentation_Rank24", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Basic"],
+            24: ["Alchemy_Tier4_Create_Elemental_Aggregate", "Alchemy_Tier4_Experiment_Rank25", "Alchemy_Tier4_Experimentation_Rank24", "Alchemy_Tier4_Aquaregia_2", "Alchemy_Tier4_Refine_Basic", "Alchemy_Tier4_Gather_Components", "Alchemy_Tier1_Gather_Components"],
             25: '+25',
         }
     });
@@ -1895,6 +1952,8 @@ function addProfile(profession, profile, base){
         },
         trackedResources: [],
         slotUse: [],
+        slotUseFullTaskName: [],
+        slotUseTimes: [],
     };
 
     /*  For searching unsafeWindow.client.dataModel.model.ent.main.inventory.assignedslots / unsafeWindow.client.dataModel.model.ent.main.inventory.notassignedslots  
@@ -1916,6 +1975,10 @@ function addProfile(profession, profile, base){
         fname: 'Tome of Experience',
         name: 'Item_Potion_Xp_Account',
         bank: false, unbound: true, btc: false, bta: true
+    }, {
+        fname: 'Dragon Egg',
+        name: 'Crafting_Resource_Dragon_Egg',
+        bank: false, unbound: true, btc: false, bta: false
     }, {
         fname: 'Unified Elements',
         name: 'Crafting_Resource_Elemental_Unified',
@@ -3059,6 +3122,22 @@ function addProfile(profession, profile, base){
             return false;
         }
 
+        // check for the task slot limit.
+        var taskLimit = checkTaskLimit(taskname)
+        if (taskLimit > 0) {
+            var count = 0;
+            unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.forEach(function(slot, ix) {
+                if (!slot.islockedslot && !slot.hascompletedetails !== 1 && slot.hdef.substring(slot.hdef.indexOf('[')+1,slot.hdef.indexOf(']')) == taskname ) {
+                    count++;
+                }
+            });
+            if (count >= taskLimit) {
+                console.log('Task limit reached. Limit: ', taskLimit, " Assigned: ", count);
+                return false;
+            }
+        }
+
+
         // start task if requirements are met
         if (!thisTask.failslevelrequirementsfilter && !thisTask.failslevelrequirements && !thisTask.failsresourcesrequirements) {
             return thisTask;
@@ -3808,14 +3887,14 @@ function addProfile(profession, profile, base){
 
         if (getSetting('generalSettings','openRewards')) {
             var _pbags = unsafeWindow.client.dataModel.model.ent.main.inventory.playerbags;
-            var _cRewardPat = /Reward_Item_Chest|Gateway_Rewardpack/;
+            var _cRewardPat = /Reward_Item_Chest|Gateway_Rewardpack|Rewardpack_Invocation_Mechanical/;
             console.log("Opening Rewards");
             $.each(_pbags, function(bi, bag) {
                 bag.slots.forEach(function(slot) {
                     if (slot && _cRewardPat.test(slot.name)) {
                         if (slot.count >= 99)
                             slot.count = 99;
-                        
+
                         var reserve = getSetting('generalSettings', 'keepOneUnopened') ? 1 : 0;
                         for (i = 1; i <= (slot.count - reserve); i++) {
                             window.setTimeout(function() {
@@ -3970,6 +4049,8 @@ function addProfile(profession, profile, base){
         
         // Slot assignment
         unsafeWindow.client.dataModel.model.ent.main.itemassignments.assignments.forEach(function(slot, ix) {
+            charStatisticsList[curCharName].slotUseFullTaskName[ix] = slot.displayname;
+            charStatisticsList[curCharName].slotUseTimes[ix] = slot.ufinishdate;
             if (!slot.islockedslot && slot.category !== "None") {
                 charStatisticsList[curCharName].slotUse[ix] = slot.category;
             } else if (slot.islockedslot) {
@@ -4462,11 +4543,12 @@ function addProfile(profession, profile, base){
         if (!($("#settingsButton").length)) {
             // Add the required CSS
             AddCss("\
+            	#content_box.section{margin-left: 120px !important;}\
                 #settingsButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 0px; top: 0px; padding: 3px; z-index: 1000;}\
                 #pauseButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 23px; top: 0px; padding: 3px; z-index: 1000;}\
                 #manualButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 46px; top: 0px; padding: 3px; z-index: 1000;}\
                 #revisitButton{border-bottom: 1px solid rgb(102, 102, 102); border-right: 1px solid rgb(102, 102, 102); background: none repeat scroll 0% 0% rgb(238, 238, 238); display: block; position: fixed; overflow: auto; right: 69px; top: 0px; padding: 3px; z-index: 1000;}\
-                #settingsPanel{position: fixed; overflow: auto; right: 0px; top: 0px; width: 700px;max-height:100%;font: 12px sans-serif; text-align: left; display: block; z-index: 1001;}\
+                #settingsPanel{position: fixed; overflow: auto; right: 0px; top: 0px; min-width: 700px;max-width: 60%;max-height:100%;font: 12px sans-serif; text-align: left; display: block; z-index: 1001;}\
                 #settings_title{font-weight: bolder; background: none repeat scroll 0% 0% rgb(204, 204, 204); border-bottom: 1px solid rgb(102, 102, 102); padding: 3px;}\
                 #settingsPanelButtonContainer {background: none repeat scroll 0% 0% rgb(204, 204, 204); border-top: 1px solid rgb(102, 102, 102);padding: 3px;text-align:center} \
                 #charSettingsAccordion h3.inactive {color: LightGray ;}\
@@ -4481,6 +4563,7 @@ function addProfile(profession, profile, base){
                 .charSettingsTab div { overflow: auto; }\
                 #rcounters ul li span { display: inline-block; min-width: 125px; }\
                 #settingsPanel table { width: 100%; }\
+                #settingsPanel table tbody tr:hover td { background-color: #aed0ea; }\
                 .ranked:nth-child(6n+2) { color: purple; } .ranked:nth-child(6n+3) { color: blue; } .ranked:nth-child(6n+4) { color: green } \
                 .ranked2:nth-child(6n+1) { color: purple; } .ranked2:nth-child(6n+2) { color: blue; } .ranked2:nth-child(6n+3) { color: green } \
                 .tranked:nth-child(4n+2) { color: purple; } .tranked:nth-child(4n+3) { color: blue; } .tranked:nth-child(4n) { color: green } \
@@ -4492,7 +4575,7 @@ function addProfile(profession, profile, base){
                 table.withRotation td.rotate, table.withRotation th.rotate { height: 125px; } \
                 table.withRotation td.rotate, table.withRotation th.rotate > div { transform: translate(0, 38px) rotate(290deg); width: 30px; } \
                 table.withRotation td.rotate, table.withRotation th.rotate > div > span { border-bottom: 1px solid #bbb; padding: 0px 0px; white-space: nowrap; } \
-                table.withRotation td { border-right: 1px solid #bbb;} \
+                table.withRotation td { border-right: 1px solid #bbb; white-space: nowrap; } \
                 input[type='checkbox'].settingsInput { margin: 5px 10px 5px 5px;  }\
                 input.settingsInput { margin: 5px 5px; }\
                 label.settingsLabel { margin: 5px 5px; min-width: 150px; display: inline-block; }\
@@ -6037,6 +6120,34 @@ function addProfile(profession, profile, base){
         }
     }
 
+
+    function checkTaskLimit(taskNamePattern) {
+        var limits = {
+            'Leadership_Voucher_Ad_T4' : 1,
+            'Leadership_Voucher_Labor_T3': 1,
+            'Jewelcrafting_Voucher_Gems_T4': 1,
+            'Weaponsmithing_Voucher_Gear_T4': 1,
+            'Artificing_Voucher_Gear_T4': 1,
+            'Mailsmithing_Voucher_Gear_T4': 1,
+            'Platesmithing_Voucher_Gear_T4': 1,
+            'Leatherworking_Voucher_Gear_T4': 1,
+            'Tailoring_Voucher_Gear_T4': 1,
+            'Leadership_Tier4_24_Wizardsseneschal': 3,
+            'Leadership_Tier4_22r_Capturebandithq': 3,
+            'Leadership_Tier4_24r_Killdragon' : 3,
+            'Leadership_Tier4_21r_Killelemental' : 3,
+            'Leadership_Tier4_21_Protectmagic' : 3,
+            'Leadership_Tier4_23_Guardnoble' : 3,
+            'Leadership_Tier4_23r_Securepilgrimage' : 3,
+            'Leadership_Tier4_25_Battleelementalcultists' : 3,
+        }
+        if (taskNamePattern.indexOf('[') > 0) {
+            taskNamePattern = taskNamePattern.substring(taskNamePattern.indexOf('[')+1,taskNamePattern.indexOf(']'));
+        }
+        if (limits.hasOwnProperty(taskNamePattern)) return limits[taskNamePattern];
+        else return -1;
+    }
+
     function addTranslation() {
         var lang = GM_getValue('language', 'en');
         translation = {
@@ -6215,11 +6326,6 @@ function addProfile(profession, profile, base){
         return translation[lang][key];
     }
 
-    /** Start, Helpers added by users.
-     * Adds fetures, options to base script and can be easily removed if needed
-     * Add description so anyone can see if they can use Function somewhere
-     * Use "brackets" around function start and end //yourname
-     */
     //RottenMind, returns inventory space, use Inventory_bagspace(); gives current free bags slots, from MAC-NW function
 
     function Inventory_bagspace() {
@@ -6234,8 +6340,7 @@ function addProfile(profession, profile, base){
         });
         return _bagUnused;
     }
-    //RottenMind
-    /** End, Helpers added by users.*/
+    
 
     // Add the settings button and start a process timer
     addSettings();
