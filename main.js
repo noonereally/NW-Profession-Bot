@@ -3252,88 +3252,91 @@ function addProfile(profession, profile, base){
             return false;
         }
 
-        var massTaskAllowed = ((profile !== undefined) && (profile.useMassTask !== undefined) && (profile.useMassTask === true));            
+        if (!((profile !== undefined) && (profile.autoIngredientSearch !== undefined) && (profile.autoIngredientSearch === false))) {
 
-        // Generate list of available tasks to search ingredients/assets from
-        console.log("Searching ingredient tasks for:", profname);
-        var taskList = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function(entry) {
-            // remove header lines first to avoid null def
-            if (entry.isheader) {
-                return false;
-            }
-
-            // Too high level
-            if (entry.failslevelrequirements) {
-                return false;
-            }
-
-            // Rewards do not contain item we want to make
-            if (searchAsset) {
-                if (entry.def.icon != searchItem || !entry.def.name.match(/Recruit/) || entry.def.requiredrank > 14) {
+            var massTaskAllowed = ((profile !== undefined) && (profile.useMassTask !== undefined) && (profile.useMassTask === true));            
+            // Generate list of available tasks to search ingredients/assets from
+            console.log("Searching ingredient tasks for:", profname);
+            var taskList = unsafeWindow.client.dataModel.model.craftinglist['craft_' + profname].entries.filter(function(entry) {
+                // remove header lines first to avoid null def
+                if (entry.isheader) {
                     return false;
                 }
-            } else {
-                if (!(entry.rewards.some(function(itm) {
-                    try {
-                        return itm.hdef.match(/\[(\w+)\]/)[1] == searchItem;
-                    } catch (e) {}
-                }))) {
+
+                // Too high level
+                if (entry.failslevelrequirements) {
                     return false;
                 }
-            }
 
-            // Skip mass production tasks (don't skip for profiles with useMassTask flag == true)
-            if (! massTaskAllowed) {
-                if (entry.def.displayname.match(/^(Batch|Mass|Deep|Intensive) /)) {
+                // Rewards do not contain item we want to make
+                if (searchAsset) {
+                    if (entry.def.icon != searchItem || !entry.def.name.match(/Recruit/) || entry.def.requiredrank > 14) {
+                        return false;
+                    }
+                } else {
+                    if (!(entry.rewards.some(function(itm) {
+                        try {
+                            return itm.hdef.match(/\[(\w+)\]/)[1] == searchItem;
+                        } catch (e) {}
+                    }))) {
+                        return false;
+                    }
+                }
+
+                // Skip mass production tasks (don't skip for profiles with useMassTask flag == true)
+                if (! massTaskAllowed) {
+                    if (entry.def.displayname.match(/^(Batch|Mass|Deep|Intensive) /)) {
+                        return false;
+                    }
+                }
+
+                // Skip trading tasks
+                if (entry.def.displayname.match(/rading$/)) {
                     return false;
                 }
-            }
 
-            // Skip trading tasks
-            if (entry.def.displayname.match(/rading$/)) {
+                // Skip looping Transmute tasks
+                if (entry.def.displayname.match(/^(Transmute|Create) /)) {
+                    return false;
+                }
+
+                return true;
+            });
+
+            if (!taskList.length) {
+                console.log("No ingredient tasks found for:", taskname, searchItem);
+                if (!searchItem.match(/(_Research)|(_Craftsman_)|(Crafted_)/)) {
+                    if (pleaseBuy.push("Please buy " + searchItem + " for " + unsafeWindow.client.getCurrentCharAtName()) > 5) {
+                        pleaseBuy.shift();
+                    }
+                }
                 return false;
             }
 
-            // Skip looping Transmute tasks
-            if (entry.def.displayname.match(/^(Transmute|Create) /)) {
-                return false;
-            }
-
-            return true;
-        });
-
-        if (!taskList.length) {
-            console.log("No ingredient tasks found for:", taskname, searchItem);
-            if (!searchItem.match(/(_Research)|(_Craftsman_)|(Crafted_)/)) {
-                if (pleaseBuy.push("Please buy " + searchItem + " for " + unsafeWindow.client.getCurrentCharAtName()) > 5) {
-                    pleaseBuy.shift();
+            // for profiles with useMassTask flag == true select Mass task
+            if (massTaskAllowed) {
+                for (var i=0; i<taskList.length; i++) {
+                    if (taskList[i].def.displayname.match(/^(Batch|Mass|Deep|Intensive) /)) {
+                        taskList = taskList.splice(i, 1);
+                        break;
+                    }
                 }
             }
-            return false;
-        }
 
-        // for profiles with useMassTask flag == true select Mass task
-        if (massTaskAllowed) {
-            for (var i=0; i<taskList.length; i++) {
-                if (taskList[i].def.displayname.match(/^(Batch|Mass|Deep|Intensive) /)) {
-                    taskList = taskList.splice(i, 1);
-                    break;
+            // Use more efficient Empowered task for Aqua if available.
+            if ((searchItem == "Crafting_Resource_Aquavitae" || searchItem == "Crafting_Resource_Aquaregia") && taskList.length > 1) {
+                taskList.shift();
+            }
+
+            // Should really only be one result now but lets iterate through anyway.
+            for (var i = 0; i < taskList.length; i++) {
+                console.log("Attempting search for ingredient task:", taskList[i].def.name);
+                var task = searchForTask(taskList[i].def.name, profname, profile, professionLevel);
+                if (task === null || task) {
+                    return task;
                 }
             }
-        }
-
-        // Use more efficient Empowered task for Aqua if available.
-        if ((searchItem == "Crafting_Resource_Aquavitae" || searchItem == "Crafting_Resource_Aquaregia") && taskList.length > 1) {
-            taskList.shift();
-        }
-
-        // Should really only be one result now but lets iterate through anyway.
-        for (var i = 0; i < taskList.length; i++) {
-            console.log("Attempting search for ingredient task:", taskList[i].def.name);
-            var task = searchForTask(taskList[i].def.name, profname, profile, professionLevel);
-            if (task === null || task) {
-                return task;
-            }
+            
         }
         return false;
     }
