@@ -346,14 +346,15 @@ function addProfile(profession, profile, base){
     };
     
     // getting new profile formated
-    var newProfile = jQuery.extend(true, profileBase, profile),
-        baseProfile;
+    var baseProfile;
     // getting base to extend
       base = base ||  (professionSet.taskListName === 'Leadership' ? 'RP' : 'default');
       if(base && typeof base === 'string') {
         var existing = professionSet.profiles.filter(function(e) {return e.profileName === base;});
         if(existing && existing.length) {baseProfile = existing[0];}
       }
+    
+    var newProfile = jQuery.extend(true, profileBase, baseProfile, profile);
     
     // setting levels
     var baseLevels = baseProfile ? baseProfile.level : [],
