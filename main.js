@@ -354,7 +354,8 @@ function addProfile(profession, profile, base){
         if(existing && existing.length) {baseProfile = existing[0];}
       }
     
-    var newProfile = jQuery.extend(true, profileBase, baseProfile, profile);
+    var newProfile = jQuery.extend(profileBase, baseProfile);
+    jQuery.extend(true, newProfile, newProfile, profile);
     
     // setting levels
     var baseLevels = baseProfile ? baseProfile.level : [],
